@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BettaDayZ - PBBG Crime & Dungeon Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Header -->
+        <header>
+            <h1>🎮 BettaDayZ</h1>
+            <p class="subtitle">Crime Dungeon Style With Life Simulation</p>
+        </header>
+
+        <!-- Main Game Area -->
+        <div id="main-content">
+            <!-- Left Sidebar - Player Stats -->
+            <aside id="stats-panel">
+                <h2>Player Stats</h2>
+                <div class="stat-group">
+                    <div class="stat-item">
+                        <span class="stat-label">Name:</span>
+                        <span id="player-name">Criminal</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Level:</span>
+                        <span id="player-level">1</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">XP:</span>
+                        <span id="player-xp">0</span> / <span id="player-xp-max">100</span>
+                    </div>
+                </div>
+                
+                <div class="stat-group">
+                    <div class="stat-bar-container">
+                        <div class="stat-label">Health:</div>
+                        <div class="stat-bar">
+                            <div id="health-bar" class="bar-fill health-bar"></div>
+                        </div>
+                        <div class="stat-value"><span id="health-value">100</span>/100</div>
+                    </div>
+                    
+                    <div class="stat-bar-container">
+                        <div class="stat-label">Energy:</div>
+                        <div class="stat-bar">
+                            <div id="energy-bar" class="bar-fill energy-bar"></div>
+                        </div>
+                        <div class="stat-value"><span id="energy-value">100</span>/100</div>
+                    </div>
+                </div>
+
+                <div class="stat-group">
+                    <div class="stat-item">
+                        <span class="stat-label">💰 Money:</span>
+                        <span id="player-money">$100</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">⭐ Reputation:</span>
+                        <span id="player-reputation">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">💪 Strength:</span>
+                        <span id="player-strength">10</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🎯 Agility:</span>
+                        <span id="player-agility">10</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">🧠 Intelligence:</span>
+                        <span id="player-intelligence">10</span>
+                    </div>
+                </div>
+
+                <div class="stat-group">
+                    <h3>Equipment</h3>
+                    <div class="equipment-slot">
+                        <span>Weapon:</span>
+                        <span id="equipped-weapon">None</span>
+                    </div>
+                    <div class="equipment-slot">
+                        <span>Armor:</span>
+                        <span id="equipped-armor">None</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Center Area - Game Actions -->
+            <main id="game-area">
+                <!-- Message Log -->
+                <div id="message-log">
+                    <h3>Game Log</h3>
+                    <div id="messages">
+                        <p class="message">Welcome to BettaDayZ! Build your criminal empire and conquer the dungeons.</p>
+                    </div>
+                </div>
+
+                <!-- Action Tabs -->
+                <div id="action-tabs">
+                    <button class="tab-btn active" data-tab="life">Life</button>
+                    <button class="tab-btn" data-tab="crime">Crime</button>
+                    <button class="tab-btn" data-tab="dungeon">Dungeon</button>
+                    <button class="tab-btn" data-tab="shop">Shop</button>
+                    <button class="tab-btn" data-tab="inventory">Inventory</button>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="tab-content">
+                    <!-- Life Tab -->
+                    <div id="life-tab" class="tab-panel active">
+                        <h3>Life Activities</h3>
+                        <div class="action-grid">
+                            <button class="action-btn" onclick="game.rest()">
+                                <span class="action-icon">😴</span>
+                                <span class="action-name">Rest</span>
+                                <span class="action-desc">Restore health & energy</span>
+                                <span class="action-cost">Time: 1h</span>
+                            </button>
+                            <button class="action-btn" onclick="game.work()">
+                                <span class="action-icon">💼</span>
+                                <span class="action-name">Work</span>
+                                <span class="action-desc">Earn honest money</span>
+                                <span class="action-cost">Energy: 20</span>
+                            </button>
+                            <button class="action-btn" onclick="game.train('strength')">
+                                <span class="action-icon">💪</span>
+                                <span class="action-name">Train Strength</span>
+                                <span class="action-desc">Increase strength</span>
+                                <span class="action-cost">Energy: 15, $50</span>
+                            </button>
+                            <button class="action-btn" onclick="game.train('agility')">
+                                <span class="action-icon">🎯</span>
+                                <span class="action-name">Train Agility</span>
+                                <span class="action-desc">Increase agility</span>
+                                <span class="action-cost">Energy: 15, $50</span>
+                            </button>
+                            <button class="action-btn" onclick="game.train('intelligence')">
+                                <span class="action-icon">🧠</span>
+                                <span class="action-name">Study</span>
+                                <span class="action-desc">Increase intelligence</span>
+                                <span class="action-cost">Energy: 15, $50</span>
+                            </button>
+                            <button class="action-btn" onclick="game.socialize()">
+                                <span class="action-icon">👥</span>
+                                <span class="action-name">Socialize</span>
+                                <span class="action-desc">Build reputation</span>
+                                <span class="action-cost">Energy: 10, $25</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Crime Tab -->
+                    <div id="crime-tab" class="tab-panel">
+                        <h3>Criminal Activities</h3>
+                        <div class="action-grid">
+                            <button class="action-btn" onclick="game.commitCrime('pickpocket')">
+                                <span class="action-icon">👛</span>
+                                <span class="action-name">Pickpocket</span>
+                                <span class="action-desc">Steal from pedestrians</span>
+                                <span class="action-cost">Energy: 10 | Risk: Low</span>
+                                <span class="action-reward">$20-50</span>
+                            </button>
+                            <button class="action-btn" onclick="game.commitCrime('mugging')">
+                                <span class="action-icon">🔪</span>
+                                <span class="action-name">Mugging</span>
+                                <span class="action-desc">Rob someone at knifepoint</span>
+                                <span class="action-cost">Energy: 15 | Risk: Medium</span>
+                                <span class="action-reward">$50-150</span>
+                            </button>
+                            <button class="action-btn" onclick="game.commitCrime('burglary')">
+                                <span class="action-icon">🏠</span>
+                                <span class="action-name">Burglary</span>
+                                <span class="action-desc">Break into a house</span>
+                                <span class="action-cost">Energy: 20 | Risk: Medium</span>
+                                <span class="action-reward">$100-300</span>
+                            </button>
+                            <button class="action-btn" onclick="game.commitCrime('carjacking')">
+                                <span class="action-icon">🚗</span>
+                                <span class="action-name">Carjacking</span>
+                                <span class="action-desc">Steal a vehicle</span>
+                                <span class="action-cost">Energy: 25 | Risk: High</span>
+                                <span class="action-reward">$200-500</span>
+                            </button>
+                            <button class="action-btn" onclick="game.commitCrime('bankheist')">
+                                <span class="action-icon">🏦</span>
+                                <span class="action-name">Bank Heist</span>
+                                <span class="action-desc">Rob a bank (requires team)</span>
+                                <span class="action-cost">Energy: 40 | Risk: Very High</span>
+                                <span class="action-reward">$1000-3000</span>
+                            </button>
+                            <button class="action-btn" onclick="game.commitCrime('blackmarket')">
+                                <span class="action-icon">💎</span>
+                                <span class="action-name">Black Market</span>
+                                <span class="action-desc">Trade illegal goods</span>
+                                <span class="action-cost">Energy: 30 | Risk: High</span>
+                                <span class="action-reward">$500-1500</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Dungeon Tab -->
+                    <div id="dungeon-tab" class="tab-panel">
+                        <h3>Dungeon Exploration</h3>
+                        <div class="dungeon-info">
+                            <p>Explore dangerous dungeons to find treasure and battle enemies!</p>
+                            <p>Current Floor: <span id="dungeon-floor">0</span></p>
+                        </div>
+                        <div class="action-grid">
+                            <button class="action-btn" onclick="game.exploreDungeon('easy')">
+                                <span class="action-icon">🚪</span>
+                                <span class="action-name">Easy Dungeon</span>
+                                <span class="action-desc">Low level enemies</span>
+                                <span class="action-cost">Energy: 20</span>
+                            </button>
+                            <button class="action-btn" onclick="game.exploreDungeon('medium')">
+                                <span class="action-icon">⚔️</span>
+                                <span class="action-name">Medium Dungeon</span>
+                                <span class="action-desc">Moderate enemies</span>
+                                <span class="action-cost">Energy: 30</span>
+                            </button>
+                            <button class="action-btn" onclick="game.exploreDungeon('hard')">
+                                <span class="action-icon">🐉</span>
+                                <span class="action-name">Hard Dungeon</span>
+                                <span class="action-desc">Dangerous enemies</span>
+                                <span class="action-cost">Energy: 40</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Shop Tab -->
+                    <div id="shop-tab" class="tab-panel">
+                        <h3>Shop</h3>
+                        <div class="shop-category">
+                            <h4>Weapons</h4>
+                            <div class="shop-grid">
+                                <div class="shop-item">
+                                    <div class="item-name">🗡️ Knife</div>
+                                    <div class="item-stats">+5 Damage</div>
+                                    <div class="item-price">$200</div>
+                                    <button onclick="game.buyItem('weapon', 'knife', 200, 5)">Buy</button>
+                                </div>
+                                <div class="shop-item">
+                                    <div class="item-name">🔫 Pistol</div>
+                                    <div class="item-stats">+15 Damage</div>
+                                    <div class="item-price">$500</div>
+                                    <button onclick="game.buyItem('weapon', 'pistol', 500, 15)">Buy</button>
+                                </div>
+                                <div class="shop-item">
+                                    <div class="item-name">⚔️ Sword</div>
+                                    <div class="item-stats">+25 Damage</div>
+                                    <div class="item-price">$1000</div>
+                                    <button onclick="game.buyItem('weapon', 'sword', 1000, 25)">Buy</button>
+                                </div>
+                                <div class="shop-item">
+                                    <div class="item-name">🔪 Katana</div>
+                                    <div class="item-stats">+40 Damage</div>
+                                    <div class="item-price">$2500</div>
+                                    <button onclick="game.buyItem('weapon', 'katana', 2500, 40)">Buy</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="shop-category">
+                            <h4>Armor</h4>
+                            <div class="shop-grid">
+                                <div class="shop-item">
+                                    <div class="item-name">👕 Leather Jacket</div>
+                                    <div class="item-stats">+10 Defense</div>
+                                    <div class="item-price">$300</div>
+                                    <button onclick="game.buyItem('armor', 'leather', 300, 10)">Buy</button>
+                                </div>
+                                <div class="shop-item">
+                                    <div class="item-name">🦺 Kevlar Vest</div>
+                                    <div class="item-stats">+20 Defense</div>
+                                    <div class="item-price">$800</div>
+                                    <button onclick="game.buyItem('armor', 'kevlar', 800, 20)">Buy</button>
+                                </div>
+                                <div class="shop-item">
+                                    <div class="item-name">🛡️ Body Armor</div>
+                                    <div class="item-stats">+35 Defense</div>
+                                    <div class="item-price">$1500</div>
+                                    <button onclick="game.buyItem('armor', 'bodyarmor', 1500, 35)">Buy</button>
+                                </div>
+                                <div class="shop-item">
+                                    <div class="item-name">⚔️ Tactical Armor</div>
+                                    <div class="item-stats">+50 Defense</div>
+                                    <div class="item-price">$3000</div>
+                                    <button onclick="game.buyItem('armor', 'tactical', 3000, 50)">Buy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inventory Tab -->
+                    <div id="inventory-tab" class="tab-panel">
+                        <h3>Inventory</h3>
+                        <div id="inventory-content">
+                            <p>Your inventory is empty.</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Sidebar - Quick Actions -->
+            <aside id="quick-panel">
+                <h2>Quick Actions</h2>
+                <div class="quick-actions">
+                    <button class="quick-btn" onclick="game.saveGame()">💾 Save Game</button>
+                    <button class="quick-btn" onclick="game.loadGame()">📂 Load Game</button>
+                    <button class="quick-btn" onclick="game.resetGame()">🔄 New Game</button>
+                    <button class="quick-btn" onclick="game.showHelp()">❓ Help</button>
+                </div>
+
+                <div class="info-section">
+                    <h3>Tips</h3>
+                    <ul id="tips-list">
+                        <li>💡 Rest regularly to maintain health and energy</li>
+                        <li>💡 Train your skills to become stronger</li>
+                        <li>💡 Start with small crimes before attempting bigger heists</li>
+                        <li>💡 Explore dungeons for rare items and XP</li>
+                        <li>💡 Save your game often!</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <h3>Recent Events</h3>
+                    <div id="events-list">
+                        <p class="event">Game started</p>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 BettaDayZ - A Persistent Browser-Based Game | <span id="game-version">v1.0.0</span></p>
+        </footer>
+    </div>
+
+    <!-- Modal for Help/Info -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="game.closeModal()">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
