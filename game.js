@@ -548,9 +548,16 @@ class BettaDayZGame {
     }
 
     startAutoSave() {
-        setInterval(() => {
+        this.autoSaveInterval = setInterval(() => {
             this.saveGame();
         }, 60000); // Auto-save every minute
+    }
+
+    stopAutoSave() {
+        if (this.autoSaveInterval) {
+            clearInterval(this.autoSaveInterval);
+            this.autoSaveInterval = null;
+        }
     }
 
     // Help Modal

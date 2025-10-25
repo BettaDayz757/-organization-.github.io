@@ -457,7 +457,9 @@ aside h3 {
 }
 
 #tips-list li:before {
-    content: "💡 ";
+    content: "• ";
+    color: #ffd700;
+    font-weight: bold;
 }
 
 #events-list {
